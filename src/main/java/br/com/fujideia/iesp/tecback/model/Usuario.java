@@ -17,3 +17,31 @@ public class Usuario {
     private String nome;
     private String email;
 }
+
+//- Assinatura
+//  *id
+//  *tipo
+//  *valor
+//  *quantidadeDispositivos
+//
+// - Catálogo
+// *id
+// *titulo
+// *ano
+// *genero
+// *classificacao
+//
+//- Comentários
+//* id
+//* idUsuario
+//* texto
+//
+//- Genero
+//  *id
+//  *nome
+//  *descrição
+//
+//- Avaliação
+//  *id
+//  *nota
+//  *descrição
