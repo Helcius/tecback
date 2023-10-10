@@ -1,3 +1,18 @@
+Bem-vindos ao IESPFlix! A plataforma de conteúdo em vídeo mais completa e estourada de João Pessoa e adjacências!
+
+Esse projeto foi cuidadosamente elaborado por:
+
+1. Beatriz Falcão
+2. Bruna Oliveira Bezerra Magalhães de Souza
+3. Helcius Araújo Nóbrega Cabral
+4. Ingrid Freitas
+5. Paula Mota Gomes
+
+Alunos da turma P3A do curso de Sistemas para Internet (Noite) do IESP - semestre 2023.2
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Olá, seja bem vindo a mais um curso com o professor Rodrigo Fujioka.
 
 * Meu linkedin: [@rodrigofujioka](https://www.linkedin.com/in/rfujioka/)  
