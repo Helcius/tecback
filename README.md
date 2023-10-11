@@ -2,10 +2,10 @@ Bem-vindos ao IESPFlix! A plataforma de conteúdo em vídeo mais completa e esto
 
 Esse projeto foi cuidadosamente elaborado por:
 
-1. Beatriz Falcão
+1. Beatriz Falcão de Lima
 2. Bruna Oliveira Bezerra Magalhães de Souza
 3. Helcius Araújo Nóbrega Cabral
-4. Ingrid Freitas
+4. Ingrid Helena Freitas Pordeus Souza
 5. Paula Mota Gomes
 
 Alunos da turma P3A do curso de Sistemas para Internet (Noite) do IESP - semestre 2023.2
