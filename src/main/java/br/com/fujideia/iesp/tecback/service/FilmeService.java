@@ -2,12 +2,14 @@ package br.com.fujideia.iesp.tecback.service;
 
 
 import br.com.fujideia.iesp.tecback.model.Filme;
+import br.com.fujideia.iesp.tecback.model.dto.FilmeListaDTO;
 import br.com.fujideia.iesp.tecback.repository.FilmeRepository;
 import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,5 +53,33 @@ public class FilmeService {
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
     }
+
+
+    public List<Filme> listarFilmesPorGenero(String generoDado){
+        return repository.listarFilmesPorGenero(generoDado);
+    }
+
+    public List<Filme> listarFilmesPorAno(String anoDado, String tituloDado){
+        return repository.listarFilmesPorAno(anoDado, tituloDado);
+    }
+
+    public List<FilmeListaDTO> listaFilmeNomeGenero(){
+        List<Filme> listaFilme = repository.findAll();
+        List<FilmeListaDTO> listaDTO = new ArrayList<>();
+        for (Filme filme : listaFilme){
+            listaDTO.add(
+                    FilmeListaDTO
+                            .builder()
+                            .nome(filme.getTitulo())
+                            .nomeGenero(filme.getGenero().getTitulo())
+                            .build()
+            );
+        }
+        return listaDTO;
+     }
+
+
+
+
 
 }
