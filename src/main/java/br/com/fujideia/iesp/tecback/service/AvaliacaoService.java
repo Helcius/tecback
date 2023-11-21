@@ -2,9 +2,11 @@ package br.com.fujideia.iesp.tecback.service;
 
 import br.com.fujideia.iesp.tecback.model.Avaliacao;
 import br.com.fujideia.iesp.tecback.model.Filme;
+import br.com.fujideia.iesp.tecback.model.dto.AvaliacaoDTO;
 import br.com.fujideia.iesp.tecback.repository.AvaliacaoRepository;
 import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ import java.util.Objects;
 @Service
 public class AvaliacaoService {
 
+    ModelMapper mapper = new ModelMapper();
+
+
     @Autowired
     private AvaliacaoRepository repository;
     public Avaliacao salvar(Avaliacao avaliacao){
@@ -22,13 +27,13 @@ public class AvaliacaoService {
         return avaliacao;
     }
 
-    public Avaliacao alterar(Avaliacao avaliacao){
-        if(Objects.nonNull(avaliacao.getId())){
-            avaliacao = repository.save(avaliacao);
+    public AvaliacaoDTO alterar(AvaliacaoDTO avaliacaoDTO){
+        if(Objects.nonNull(avaliacaoDTO.getId())){
+            avaliacaoDTO = mapper.map(repository.save(mapper.map(avaliacaoDTO, Avaliacao.class)), AvaliacaoDTO.class);
         }else{
             throw new NotFoundException();
         }
-        return avaliacao;
+        return avaliacaoDTO;
     }
 
     public List<Avaliacao> listar(){
