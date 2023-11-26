@@ -13,7 +13,7 @@ public class Genero {
     @Id
     @GeneratedValue
     private Integer id;
-    private String titulo;
+    private String nome;
     private Integer ano;
     private String genero;
     private String classificacao;

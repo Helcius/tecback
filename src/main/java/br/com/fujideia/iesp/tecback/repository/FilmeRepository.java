@@ -16,12 +16,12 @@ public interface FilmeRepository extends JpaRepository<Filme,Integer> {
     @Query("select f From Filme f where f.titulo =:titulo")
     List<Filme> listarFilmesPorTitulo(String titulo);
 
-    @Query("select filme from Filme filme where filme.genero.nome=:generoDado")
-    List<Filme> listarFilmesPorGenero(String generoDado);
+    @Query("select filme from Filme filme where filme.genero.nome=:nomeGenero")
+    List<Filme> listarFilmesPorGenero(String nomeGenero);
 
-    @Query("select f from Filme f where filme.ano=:anoDado " +
-            "and filme.ano=:tituloDado")
-    List<Filme> listarFilmesPorAno(String anoDado, String tituloDado);
-
+    @Query("select filme from Filme filme " +
+            " where filme.titulo=:titulo and filme.ano=:ano")
+    List<Filme> listarFilmePorTituloAno(String titulo, Integer ano);
+    List<Filme> findFilmeByTituloAndAno(String titulo, Integer ano);
 
 }

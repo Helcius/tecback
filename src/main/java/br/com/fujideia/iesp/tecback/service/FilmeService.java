@@ -2,10 +2,12 @@ package br.com.fujideia.iesp.tecback.service;
 
 
 import br.com.fujideia.iesp.tecback.model.Filme;
+import br.com.fujideia.iesp.tecback.model.dto.FilmeDTO;
 import br.com.fujideia.iesp.tecback.model.dto.FilmeListaDTO;
 import br.com.fujideia.iesp.tecback.repository.FilmeRepository;
 import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ import java.util.Objects;
 @Slf4j
 @Service
 public class FilmeService {
+
+    ModelMapper mapper = new ModelMapper();
+
     @Autowired
     private FilmeRepository repository;
 
@@ -24,13 +29,14 @@ public class FilmeService {
         return filme;
     }
 
-    public Filme alterar(Filme filme){
+    public FilmeDTO alterar(Filme filme){
+
         if(Objects.nonNull(filme.getId())){
             filme = repository.save(filme);
         }else{
             throw new NotFoundException();
         }
-        return filme;
+        return mapper.map(filme, FilmeDTO.class);
     }
 
     public List<Filme> listar(){
@@ -48,36 +54,38 @@ public class FilmeService {
         return true;
     }
 
-    public Filme consultarPorId(Integer id){
-        return repository
+    public FilmeDTO consultarPorId(Integer id){
+
+        //recupera o model do banco
+        var filme = repository
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
+
+        //converte em DTP utilizando Model Mapper
+        var filmeDTO = mapper.map(filme, FilmeDTO.class);
+
+        return filmeDTO;
     }
 
+    public List<Filme> listarFilmesPorGenero(String nomeGenero){
 
-    public List<Filme> listarFilmesPorGenero(String generoDado){
-        return repository.listarFilmesPorGenero(generoDado);
-    }
-
-    public List<Filme> listarFilmesPorAno(String anoDado, String tituloDado){
-        return repository.listarFilmesPorAno(anoDado, tituloDado);
+        return repository.listarFilmesPorGenero(nomeGenero);
     }
 
     public List<FilmeListaDTO> listaFilmeNomeGenero(){
-        List<Filme> listaFilme = repository.findAll();
-        List<FilmeListaDTO> listaDTO = new ArrayList<>();
-        for (Filme filme : listaFilme){
+        var listaFilme = repository.findAll();
+        var listaDTO = new ArrayList<FilmeListaDTO>();
+        for(Filme filme : listaFilme){
             listaDTO.add(
                     FilmeListaDTO
                             .builder()
                             .nome(filme.getTitulo())
-                            .nomeGenero(filme.getGenero().getTitulo())
+                            .nomeGenero(filme.getGenero().getNome())
                             .build()
             );
         }
         return listaDTO;
-     }
-
+    }
 
 
 

@@ -15,12 +15,13 @@ public class Filme implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-
     private String titulo;
     @Column(name = "ds_sinopse", length = 500)
     private String sinopse;
 
+    private Integer ano;
+
     @ManyToOne
     private Genero genero;
-
 }
+

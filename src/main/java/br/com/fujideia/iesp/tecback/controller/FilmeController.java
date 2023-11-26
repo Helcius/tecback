@@ -1,6 +1,7 @@
 package br.com.fujideia.iesp.tecback.controller;
 
 import br.com.fujideia.iesp.tecback.model.Filme;
+import br.com.fujideia.iesp.tecback.model.dto.FilmeDTO;
 import br.com.fujideia.iesp.tecback.model.dto.FilmeListaDTO;
 import br.com.fujideia.iesp.tecback.service.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class FilmeController {
     }
 
     @PutMapping
-    public ResponseEntity<Filme> alterar(@RequestBody Filme filme){
-        filme = service.alterar(filme);
-        return ResponseEntity.ok(filme);
+    public ResponseEntity<FilmeDTO> alterar(@RequestBody Filme filme){
+        var dto = service.alterar(filme);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping
@@ -34,7 +35,7 @@ public class FilmeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Filme> consultar(@PathVariable("id") Integer id){
+    public ResponseEntity<FilmeDTO> consultar(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.consultarPorId(id));
     }
 
@@ -48,17 +49,13 @@ public class FilmeController {
     }
 
     @GetMapping("/genero/{genero}")
-    public ResponseEntity<List<Filme>> listarFilmePorGenero(@PathVariable String generoDado){
-        return ResponseEntity.ok(service.listarFilmesPorGenero(generoDado));
-    }
-
-    @GetMapping("/ano/{ano}")
-    public ResponseEntity<List<Filme>> listarFilmesPorAno(@PathVariable String anoDado, String tituloDado){
-        return ResponseEntity.ok(service.listarFilmesPorAno(anoDado, tituloDado));
+    public ResponseEntity<List<Filme>> listarFilmePorGenero(@PathVariable String nomeGenero){
+        return ResponseEntity.ok(service.listarFilmesPorGenero(nomeGenero));
     }
 
     @GetMapping("/filme/nome/genero")
     public ResponseEntity<List<FilmeListaDTO>> listarFilmeNomeGenero(){
         return ResponseEntity.ok(service.listaFilmeNomeGenero());
     }
+
 }
